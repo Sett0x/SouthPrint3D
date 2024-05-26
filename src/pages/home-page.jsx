@@ -5,7 +5,7 @@ const HomePage = () => {
 
     <div className="bg-gray-800 shadow-lg">
 
-asdasdasdasd
+
       
     </div>
 
