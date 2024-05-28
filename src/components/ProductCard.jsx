@@ -1,9 +1,15 @@
 import { ProductPropTypes } from '../utils/ProductPropTypes'; // Importa las definiciones de PropTypes desde el archivo ProductPropTypes.jsx
 
 const ProductCard = ({ product }) => {
+  const getFormattedImageURL = (image) => {
+    const nameWithoutExtension = image.split('.')[0];
+    const folderName = nameWithoutExtension.slice(0, -2);
+    return `/products/${folderName}/${image}`;
+  };
   return (
-    <div className="border rounded-lg p-4">
-      <img src={product.images[0]} alt={product.name} className="w-full h-48 object-cover" /> {/* Utiliza product.images[0] en lugar de product.image */}
+    <div className="border rounded-lg p-4 flex flex-col items-start justify-between">
+      <img src={getFormattedImageURL(product.images[0])} alt={product.name} className="w-full h-48 object-cover" /> {/* Utiliza product.images[0] en lugar de product.image */}
+      <p>{getFormattedImageURL(product.images[0])}</p>
       <h3 className="text-xl font-bold mt-2">{product.name}</h3>
       <p className="text-gray-600">{product.price} €</p>
       <div className="flex items-center mt-2">
