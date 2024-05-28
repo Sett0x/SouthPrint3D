@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="bg-gray-800 shadow-lg">
+    <div className="bg-white">
       <Navbar />
       <ProductList />
       {children}
