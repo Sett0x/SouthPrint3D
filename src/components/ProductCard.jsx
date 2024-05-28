@@ -9,10 +9,10 @@ const ProductCard = ({ product }) => {
   const folderName = product.images[0];
   //product.averageRating = 2;
   return (
-    <div className="border rounded-lg p-4 flex flex-col items-start justify-between bg-opacity-25 bg-gray-700">
+    <div className="border rounded-lg p-4 flex flex-col items-start justify-between bg-gray-800">
       <img src={getFormattedImageURL(folderName)} alt={product.name} className="w-full h-full object-contain" />
-      <h3 className="text-xl font-bold mt-2">{product.name}</h3>
-      <p className="text-gray-600">{product.price} €</p>
+      <h3 className="text-xl font-bold mt-2 text-white">{product.name}</h3>
+      <p className="text-white">{product.price} €</p>
       <div className="flex items-center mt-2">
         {[...Array(product.averageRating)].map((_, i) => (
           <span key={i} className="text-yellow-500">★</span>
@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
         {[...Array(5 - product.averageRating)].map((_, i) => (
           <span key={i} className="text-gray-300">★</span>
         ))}
-        <span className="ml-2 text-gray-600">{product.reviews} reseñas</span>
+        <span className="ml-2 text-white">{product.reviews} reseñas</span>
       </div>
       <button className="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Añadir al carrito</button>
     </div>
