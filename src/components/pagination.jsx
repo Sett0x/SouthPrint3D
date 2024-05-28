@@ -13,7 +13,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     onPageChange(page);
     window.scrollTo({
         top: 0,
-        behavior: 'smooth' // Desplazamiento suave
+        behavior: 'smooth'
       });
   };
 
