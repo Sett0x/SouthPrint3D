@@ -11,6 +11,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
   const handlePageClick = (page) => {
     onPageChange(page);
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Desplazamiento suave
+      });
   };
 
   return (
