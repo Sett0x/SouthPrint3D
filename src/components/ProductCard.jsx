@@ -7,9 +7,9 @@ const ProductCard = ({ product }) => {
     return `/products/${folderName}/${image}`;
   };
   const folderName = product.images[0];
-  //product.averageRating = 2;
+  //product.averageRating = 5;
   return (
-    <div className="border rounded-lg p-4 flex flex-col items-start justify-between bg-gray-800">
+    <div className=" rounded-lg p-4 flex flex-col items-start justify-between bg-gray-800">
       <img src={getFormattedImageURL(folderName)} alt={product.name} className="w-full h-full object-contain" />
       <h3 className="text-xl font-bold mt-2 text-white">{product.name}</h3>
       <p className="text-white">{product.price} €</p>
