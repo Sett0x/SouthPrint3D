@@ -1,26 +1,60 @@
-import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ProductPropTypes } from '../utils/ProductPropTypes'; // Importa las definiciones de PropTypes desde el archivo ProductPropTypes.jsx
+import productService from '../services/productService';
+import Carousel from './Carousel';
 
-const ProductDetail = ({ products }) => {
+const ProductDetail = () => {
   const { productId } = useParams();
-  const product = products.find(p => p.id === parseInt(productId));
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!product) return <div>Producto no encontrado</div>;
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const productData = await productService.getProductById(productId);
+        setProduct(productData);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [productId]);
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!product) {
+    return <div>Producto no encontrado</div>;
+  }
+
+  const getFormattedImageURL = (image) => {
+    const nameWithoutExtension = image.split('.')[0];
+    const folderName = nameWithoutExtension.slice(0, -2);
+    return `/${folderName}/${image}`;
+  };
+
+  // Formateamos las imágenes antes de pasarlas al componente Carousel
+  const formattedImages = product.images.map(getFormattedImageURL);
 
   return (
     <div className="container mx-auto py-8">
       <div className="flex">
         <div className="w-1/2">
-          <img src={product.images[0]} alt={product.name} className="w-full h-96 object-cover" />
-          <div className="flex mt-4">
-            {product.images.map((img, i) => (
-              <img key={i} src={img} alt={`Producto ${i}`} className="w-24 h-24 object-cover mx-1" />
-            ))}
-          </div>
+          
+          <Carousel images={formattedImages} />
         </div>
         <div className="w-1/2 pl-8">
           <h2 className="text-3xl font-bold">{product.name}</h2>
+          {/* <p className="text-2xl text-gray-600">{product.categories}</p>l */}
           <p className="text-2xl text-gray-600">{product.price} €</p>
           <div className="flex items-center mt-2">
             {[...Array(product.averageRating)].map((_, i) => (
@@ -37,10 +71,6 @@ const ProductDetail = ({ products }) => {
       </div>
     </div>
   );
-};
-
-ProductDetail.propTypes = {
-  products: PropTypes.arrayOf(ProductPropTypes).isRequired // Utiliza las definiciones de PropTypes desde el archivo ProductPropTypes.jsx
 };
 
 export default ProductDetail;

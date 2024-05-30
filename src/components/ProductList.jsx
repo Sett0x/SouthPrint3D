@@ -32,7 +32,7 @@ const ProductList = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4" style={{ textAlign: 'center' }}>Lista de Productos</h2> {/* Aplica el estilo de centrado en línea */}
+      
       {loading ? (
         <p>Cargando...</p>
       ) : error ? (
