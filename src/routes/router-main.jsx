@@ -3,6 +3,7 @@ import MainLayout from '../layout/main-layout.jsx';
 import HomePage from '../pages/home-page.jsx';
 import AboutPage from '../pages/about-page.jsx';
 import ProductPage from '../pages/products-page.jsx';
+import ProductDetailPage from '../pages/productDetail-page.jsx'
 
 function RouterMain() {
   return (
@@ -12,6 +13,8 @@ function RouterMain() {
           <Route path="/" element={<HomePage />} /> {/* Página principal */}
           <Route path="/about" element={<AboutPage />} /> {/* Otras rutas */}
           <Route path="/products" element={<ProductPage />} />
+          <Route path="/products/:productId" element={<ProductDetailPage />} /> {/* Agrega la ruta para la página de detalles del producto */}
+          
         </Routes>
       </MainLayout>
     </Router>
