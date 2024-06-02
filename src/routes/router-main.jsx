@@ -4,6 +4,8 @@ import HomePage from '../pages/home-page.jsx';
 import AboutPage from '../pages/about-page.jsx';
 import ProductPage from '../pages/products-page.jsx';
 import ProductDetailPage from '../pages/productDetail-page.jsx'
+import FaqsPage from '../pages/fags-page.jsx';
+import ContactPage from '../pages/contact-page.jsx';
 
 function RouterMain() {
   return (
@@ -12,6 +14,8 @@ function RouterMain() {
         <Routes>
           <Route path="/" element={<HomePage />} /> {/* Página principal */}
           <Route path="/about" element={<AboutPage />} /> {/* Otras rutas */}
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/faqs" element={<FaqsPage />} />
           <Route path="/products" element={<ProductPage />} />
           <Route path="/products/:productId" element={<ProductDetailPage />} /> {/* Agrega la ruta para la página de detalles del producto */}
           
