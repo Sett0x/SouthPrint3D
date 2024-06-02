@@ -6,11 +6,11 @@ const Footer = () => {
           <h2 className="text-xl font-bold mb-2">Contáctanos</h2>
           <div className="flex items-center justify-center md:justify-start space-x-2">
             <img src="/icons/phone.svg" alt="Phone Icon" className="h-10 w-10" />
-            <p className="text-gray-300">Tel: 744 43 32 56</p>
+            <p className="text-gray-300">744 43 32 56</p>
           </div>
           <div className="flex items-center justify-center md:justify-start space-x-2 mt-2">
             <img src="/icons/email.svg" alt="Email Icon" className="h-10 w-10" />
-            <p className="text-gray-300">Email: southprint3d@gmail.com</p>
+            <p className="text-gray-300">southprint3d@gmail.com</p>
           </div>
         </div>
         <div className="flex space-x-4">

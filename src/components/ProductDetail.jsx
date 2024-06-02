@@ -46,15 +46,13 @@ const ProductDetail = () => {
   const formattedImages = product.images.map(getFormattedImageURL);
 
   return (
-    <div className="container mx-auto py-8">
-      <div className="flex">
-        <div className="w-1/2">
-          
+    <div className="container mx-auto py-8 px-8">
+      <div className="flex flex-col md:flex-row md:justify-center md:items-start">
+        <div className="w-full md:w-1/2 mb-4 md:mb-0">
           <Carousel images={formattedImages} />
         </div>
-        <div className="w-1/2 pl-8">
+        <div className="w-full md:w-1/2 md:pl-8">
           <h2 className="text-3xl font-bold">{product.name}</h2>
-          {/* <p className="text-2xl text-gray-600">{product.categories}</p>l */}
           <p className="text-2xl text-gray-600">{product.price} €</p>
           <div className="flex items-center mt-2">
             {[...Array(product.averageRating)].map((_, i) => (
