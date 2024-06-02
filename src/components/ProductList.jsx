@@ -44,7 +44,7 @@ const ProductList = () => {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} /> {/* Pasa las propiedades al componente Pagination */}
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
         </>
       )}
     </div>
