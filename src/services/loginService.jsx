@@ -6,7 +6,13 @@ const loginService = {
       const response = await api.post('login', { usernameOrEmail, password });
       return response;
     } catch (error) {
-      throw new Error(`Error logging in: ${error.message}`);
+      // Personaliza el mensaje de error solo para el inicio de sesión
+      if (error.message === 'Failed to post data') {
+        throw new Error('Failed to login. Please check your credentials and try again.');
+      } else {
+        // Re-lanza cualquier otro error sin modificarlo
+        throw error;
+      }
     }
   },
 };
