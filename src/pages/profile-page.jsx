@@ -28,22 +28,23 @@ const ProfilePage = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Profile Page</h1>
+      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Perfil</h1>
       {user && (
         <div>
-          <p>Username: {user.username}</p>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">Información del usuario</h2>
+          <p>Usuario: {user.username}</p>
           <p>Email: {user.email}</p>
-          <p>Phone: {user.phone}</p>
-          <p>Role: {user.role}</p>
+          <p>Teléfono: {user.phone}</p>
+          {/*<p>Role: {user.role}</p>
           {/* Otros detalles del perfil que quieras mostrar */}
           <div className="mt-4">
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">Address</h2>
-            <p>Street: {user.address.street}</p>
-            <p>Number: {user.address.number}</p>
-            <p>City: {user.address.city}</p>
-            <p>Province: {user.address.province}</p>
-            <p>State: {user.address.state}</p>
-            <p>Zipcode: {user.address.zipcode}</p>
+            <h2 className="text-xl font-semibold text-gray-800 mb-2">Dirección</h2>
+            <p>Calle: {user.address.street}</p>
+            <p>Número: {user.address.number}</p>
+            <p>Ciudad: {user.address.city}</p>
+            <p>Provincia: {user.address.province}</p>
+            <p>Estado: {user.address.state}</p>
+            <p>Codigo postal: {user.address.zipcode}</p>
           </div>
         </div>
       )}
