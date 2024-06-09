@@ -20,6 +20,20 @@ const userService = {
     }
   },
 
+  async getUserProfile() {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await api.get('users/me', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return response; // devuelve el objeto de respuesta completo
+    } catch (error) {
+      throw new Error(`Error fetching user profile: ${error.message}`);
+    }
+  },
+
   async updateUser(id, userData) {
     try {
       const response = await api.put(`users/${id}`, userData);

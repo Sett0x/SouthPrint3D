@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom'; // Importamos Navigate desde react-router-dom
 import loginService from '../services/loginService';
 
 const LoginForm = () => {
@@ -10,7 +11,9 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await loginService.login(usernameOrEmail, password);
+      const { token } = await loginService.login(usernameOrEmail, password);
+      // Guardar el token JWT y el ID del usuario en el localStorage
+      localStorage.setItem('token', token);
       setSuccess(true);
       setError(null); // Limpiar cualquier error previo en caso de éxito
     } catch (error) {
@@ -19,11 +22,15 @@ const LoginForm = () => {
     }
   };
 
+  // Si el inicio de sesión es exitoso, redirige al usuario a la página principal ("/")
+  if (success) {
+    return <Navigate to="/" replace={true} />;
+  }
+
   return (
     <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">Login</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
-      {success && <p className="text-green-500 mb-4">Login successful</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="usernameOrEmail" className="block text-gray-600 mb-1">Username or Email:</label>
