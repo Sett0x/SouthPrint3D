@@ -1,22 +1,22 @@
+// src/components/Navbar.js
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import logoutService from '../services/logoutService';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Función para cerrar el menú cuando se hace clic en un enlace del menú
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
   useEffect(() => {
-    // Remove the unused variable 'handleDocumentClick'
-
     const handleMenuOptionClick = () => {
       const navbarDefault = document.getElementById('navbar-default');
       navbarDefault.classList.add('hidden');
@@ -74,17 +74,26 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      await logoutService.logout();
+      navigate('/'); // Redirigir al usuario a la página de inicio
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   return (
     <nav className="bg-gray-800 p-4 sticky top-0 z-50">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <div className="text-white text-2xl font-bold">
           <Link to="/">SouthPrint3D</Link>
         </div>
-        <button 
+        <button
           id="menu-toggle"
-          type="button" 
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm  rounded-lg md:hidden  focus:outline-none focus:ring-2  text-gray-400 hover:bg-gray-700 focus:ring-gray-600" 
-          aria-controls="navbar-default" 
+          type="button"
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm  rounded-lg md:hidden  focus:outline-none focus:ring-2  text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
+          aria-controls="navbar-default"
           aria-expanded={isMenuOpen}
           onClick={toggleMenu}
         >
@@ -115,6 +124,9 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="/profile" onClick={closeMenu} className={`block py-2 px-3 text-white ${activeLink === '/profile' ? 'font-black' : ''} hover:bg-gray-900 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0`}>Usuario</Link>
+            </li>
+            <li>
+              <button onClick={handleLogout} className="block py-2 px-3 text-white hover:bg-gray-900 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0">Cerrar sesión</button>
             </li>
           </ul>
         </div>
