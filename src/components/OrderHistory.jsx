@@ -20,7 +20,7 @@ const OrderHistory = () => {
 
     return (
         <div className="mt-8">
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">Historial de Pedidos</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-2"></h2>
             {orderHistory.length > 0 ? (
                 orderHistory.map(order => (
                     <div key={order._id} className="border rounded-lg p-4 mt-4">
@@ -28,10 +28,10 @@ const OrderHistory = () => {
                         <p className="px-2 py-2">Fecha: {new Date(order.createdAt).toLocaleString()}</p>
                         <ul className="list-disc list-inside">
                             {order.products.map(product => (
-                                <li className="px-1 py-1" key={product._id}>{product.productName} - ${product.price.toFixed(2)}</li>
+                                <li className="px-1 py-1" key={product._id}>{product.productName} - {product.price.toFixed(2)} €</li>
                             ))}
                         </ul>
-                        <p className="px-2 py-2">Total: ${order.totalPrice.toFixed(2)}€</p>
+                        <p className="px-2 py-2">Total: {order.totalPrice.toFixed(2)} €</p>
                     </div>
                 ))
             ) : (

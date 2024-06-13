@@ -29,7 +29,7 @@ const LoginForm = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6 bg-white rounded-lg">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Login</h2>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4"></h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
