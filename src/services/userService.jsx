@@ -58,7 +58,7 @@ const userService = {
 
   async getCart() {
     try {
-      const response = await api.get(`users/me/cart`, true); // Auth required to fetch user's cart
+      const response = await api.get(`users/cart`, true); // Auth required to fetch user's cart
       return response;
     } catch (error) {
       throw new Error(`Error fetching cart: ${error.message}`);
