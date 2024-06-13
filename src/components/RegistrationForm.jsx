@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom'; // Importamos Navigate y Link desde react-router-dom
 import userService from '../services/userService';
 
 const RegistrationForm = () => {
@@ -274,6 +275,9 @@ const RegistrationForm = () => {
       <button type="submit" className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
         Registrar
       </button>
+      <div className="mt-4">
+            <Link to="/login" className="block text-center text-blue-500 hover:underline">¿tienes cuenta? Inicia sesión aquí</Link>
+          </div>
     </form>
   );
 };
