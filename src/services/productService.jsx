@@ -3,7 +3,7 @@
 import api from './api';
 
 const productService = {
-  async getProducts(queryParams = {}, page = 1, perPage = 10) {
+  async getProducts(queryParams = {}, page = 1, perPage = 12) {
     try {
       const params = new URLSearchParams({ ...queryParams, page, perPage });
       const response = await api.get(`products?${params.toString()}`);
