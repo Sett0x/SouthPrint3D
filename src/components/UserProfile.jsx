@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import userService from '../services/userService';
 
 const UserProfile = () => {
     const [user, setUser] = useState(null);
+    const [redirectToLogin, setRedirectToLogin] = useState(false);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -11,11 +13,16 @@ const UserProfile = () => {
                 setUser(userProfile);
             } catch (error) {
                 console.error('Error fetching user profile:', error);
-                // Podrías mostrar un mensaje de error al usuario aquí si lo deseas
+                setRedirectToLogin(true); // Establecer redirectToLogin en true si no hay sesión activa
             }
         };
         fetchUserProfile();
     }, []);
+
+    // Si redirectToLogin es true, redirige a la página de inicio de sesión
+    if (redirectToLogin) {
+        return <Navigate to="/login" replace={true} />;
+    }
 
     if (!user) {
         return <div>Cargando perfil...</div>; // Muestra un indicador de carga mientras se obtiene el perfil
