@@ -8,6 +8,8 @@ const OrderHistory = () => {
         const fetchOrderHistory = async () => {
             try {
                 const orders = await userService.getOrderHistory();
+                // Ordenar los pedidos por fecha de creación de forma ascendente
+                orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setOrderHistory(orders);
             } catch (error) {
                 console.error('Error fetching order history:', error);
@@ -23,7 +25,7 @@ const OrderHistory = () => {
                 orderHistory.map(order => (
                     <div key={order._id} className="border rounded-lg p-4 mt-4">
                         <p className="px-2 py-2">ID del Pedido: {order._id}</p>
-                        <p className="px-2 py-2">Fecha: {new Date(order.createdAt).toLocaleDateString()}</p>
+                        <p className="px-2 py-2">Fecha: {new Date(order.createdAt).toLocaleString()}</p>
                         <ul className="list-disc list-inside">
                             {order.products.map(product => (
                                 <li className="px-1 py-1" key={product._id}>{product.productName} - ${product.price.toFixed(2)}</li>

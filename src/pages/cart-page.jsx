@@ -70,7 +70,7 @@ const CartPage = () => {
     }
 
     if (redirect) {
-        return <Navigate to="/orders" replace={true} />;
+        return <Navigate to="/profile" replace={true} />;
     }
 
     if (loading) {
