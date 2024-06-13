@@ -35,7 +35,7 @@ const ProfilePage = () => {
           <p>Usuario: {user.username}</p>
           <p>Email: {user.email}</p>
           <p>Teléfono: {user.phone}</p>
-          {/*<p>id: {user._id}</p>
+          <p>id: {user._id}</p>
           {/*<p>Role: {user.role}</p>
           {/* Otros detalles del perfil que quieras mostrar */}
           <div className="mt-4">
