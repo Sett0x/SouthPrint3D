@@ -56,6 +56,8 @@ const userService = {
     }
   },
 
+  // CART & ORDERS
+  
   async getCart() {
     try {
       const response = await api.get(`users/cart`, true); // Auth required to fetch user's cart

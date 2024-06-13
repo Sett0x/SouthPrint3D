@@ -22,7 +22,7 @@ const OrderHistory = () => {
             {orderHistory.length > 0 ? (
                 orderHistory.map(order => (
                     <div key={order._id} className="border rounded-lg p-4 mt-4">
-                        <p className="px-2 py-2">ID de Pedido: {order._id}</p>
+                        <p className="px-2 py-2">ID del Pedido: {order._id}</p>
                         <p className="px-2 py-2">Fecha: {new Date(order.createdAt).toLocaleDateString()}</p>
                         <ul className="list-disc list-inside">
                             {order.products.map(product => (
