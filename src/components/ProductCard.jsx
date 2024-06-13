@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
         <img src={getFormattedImageURL(folderName)} alt={product.name} className="w-full h-full object-contain" />
       </Link>
       <h3 className="text-xl font-bold mt-2 text-white">{product.name}</h3>
-      <p className="text-white">{product.price} €</p>
+      <p className="text-white">{product.totalPrice} €</p>
       <div className="flex items-center mt-2">
         {[...Array(product.averageRating)].map((_, i) => (
           <span key={i} className="text-yellow-500">★</span>

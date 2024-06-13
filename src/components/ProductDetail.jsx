@@ -53,7 +53,7 @@ const ProductDetail = () => {
         </div>
         <div className="w-full md:w-1/2 md:pl-8">
           <h2 className="text-3xl font-bold">{product.name}</h2>
-          <p className="text-2xl text-gray-600">{product.price} €</p>
+          <p className="text-2xl text-gray-600">{product.totalPrice} €</p>
           <div className="flex items-center mt-2">
             {[...Array(product.averageRating)].map((_, i) => (
               <span key={i} className="text-yellow-500">★</span>
