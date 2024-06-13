@@ -1,134 +1,281 @@
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
 import userService from '../services/userService';
 
 const RegistrationForm = () => {
-    const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    email: '',
+    phone: '',
+    nombre: {
+      name: '',
+      lastname: ''
+    },
+    address: {
+      state: '',
+      province: '',
+      city: '',
+      zipcode: '',
+      street: '',
+      number: '',
+      floor: '',
+      apartment: ''
+    }
+  });
+
+  const [errors, setErrors] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name.includes('nombre.') || name.includes('address.')) {
+      const [field, subfield] = name.split('.');
+      setFormData(prevState => ({
+        ...prevState,
+        [field]: {
+          ...prevState[field],
+          [subfield]: value
+        }
+      }));
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors([]);
+    setSuccessMessage('');
+
+    try {
+      await userService.createUser(formData);
+      setSuccessMessage('Usuario registrado exitosamente');
+      setFormData({
         username: '',
         password: '',
-        confirmPassword: '',
         email: '',
         phone: '',
-        firstName: '',
-        lastName: '',
-        street: '',
-        number: '',
-        zipcode: '',
-        city: '',
-        state: '',
-        floor: '',
-        apartment: ''
-    });
-
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(false);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        try {
-            await userService.createUser(formData);
-            setSuccess(true);
-            setError(null);
-        } catch (error) {
-            setSuccess(false);
-            setError(error.message);
-        } finally {
-            setLoading(false);
+        nombre: {
+          name: '',
+          lastname: ''
+        },
+        address: {
+          state: '',
+          province: '',
+          city: '',
+          zipcode: '',
+          street: '',
+          number: '',
+          floor: '',
+          apartment: ''
         }
-    };
-
-    if (success) {
-        return <Navigate to="/login" replace={true} />;
+      });
+    } catch (error) {
+      if (error.response && error.response.data.errors) {
+        setErrors(error.response.data.errors);
+      } else {
+        setErrors([{ msg: error.message }]);
+      }
     }
+  };
 
-    return (
-        <div className="container mx-auto py-8 px-8">
-            <h1 className="text-2xl font-semibold text-gray-800 mb-4"></h1>
-            {error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                    <span className="block sm:inline">{error}</span>
-                </div>
-            )}
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                    <div>
-                        <label className="block text-gray-700">Nombre de Usuario</label>
-                        <input type="text" name="username" value={formData.username} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Contraseña</label>
-                        <input type="password" name="password" value={formData.password} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Confirmar Contraseña</label>
-                        <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Correo Electrónico</label>
-                        <input type="email" name="email" value={formData.email} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Teléfono</label>
-                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Nombre</label>
-                        <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Apellido</label>
-                        <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Calle</label>
-                        <input type="text" name="street" value={formData.street} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Número</label>
-                        <input type="text" name="number" value={formData.number} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Código Postal</label>
-                        <input type="text" name="zipcode" value={formData.zipcode} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Ciudad</label>
-                        <input type="text" name="city" value={formData.city} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Provincia/Estado</label>
-                        <input type="text" name="state" value={formData.state} onChange={handleChange} className="form-input mt-1 block w-full" required />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Piso (opcional)</label>
-                        <input type="text" name="floor" value={formData.floor} onChange={handleChange} className="form-input mt-1 block w-full" />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Departamento (opcional)</label>
-                        <input type="text" name="apartment" value={formData.apartment} onChange={handleChange} className="form-input mt-1 block w-full" />
-                    </div>
-                </div>
-                <div className="mt-4">
-                    <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none" disabled={loading}>
-                        {loading ? 'Registrando...' : 'Registrarse'}
-                    </button>
-                    <Link to="/login" className="ml-2 text-blue-500 hover:underline">
-                        Iniciar sesión
-                    </Link>
-                </div>
-            </form>
+  return (
+    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white rounded-md">
+      <h2 className="text-2xl font-bold mb-6 text-center"></h2>
+      {errors.length > 0 && (
+        <div className="mb-4 p-4 text-red-700 bg-red-100 rounded-md">
+          {errors.map((error, index) => (
+            <p key={index}>{error.msg}</p>
+          ))}
         </div>
-    );
+      )}
+      {successMessage && (
+        <div className="mb-4 p-4 text-green-700 bg-green-100 rounded-md">
+          {successMessage}
+        </div>
+      )}
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Nombre de usuario</label>
+        <input 
+          type="text" 
+          name="username" 
+          value={formData.username} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Contraseña</label>
+        <input 
+          type="password" 
+          name="password" 
+          value={formData.password} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+          minLength="6" 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Email</label>
+        <input 
+          type="email" 
+          name="email" 
+          value={formData.email} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Teléfono</label>
+        <input 
+          type="text" 
+          name="phone" 
+          value={formData.phone} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+          minLength="9" 
+          maxLength="15" 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Nombre</label>
+        <input 
+          type="text" 
+          name="nombre.name" 
+          value={formData.nombre.name} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Apellido</label>
+        <input 
+          type="text" 
+          name="nombre.lastname" 
+          value={formData.nombre.lastname} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+        />
+      </div>
+
+      <h3 className="text-xl font-semibold mb-4">Dirección</h3>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Estado</label>
+        <input 
+          type="text" 
+          name="address.state" 
+          value={formData.address.state} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Provincia</label>
+        <input 
+          type="text" 
+          name="address.province" 
+          value={formData.address.province} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Ciudad</label>
+        <input 
+          type="text" 
+          name="address.city" 
+          value={formData.address.city} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Código Postal</label>
+        <input 
+          type="text" 
+          name="address.zipcode" 
+          value={formData.address.zipcode} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+          minLength="5" 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Calle</label>
+        <input 
+          type="text" 
+          name="address.street" 
+          value={formData.address.street} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Número</label>
+        <input 
+          type="number" 
+          name="address.number" 
+          value={formData.address.number} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+          required 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Piso (opcional)</label>
+        <input 
+          type="text" 
+          name="address.floor" 
+          value={formData.address.floor} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-sm font-medium mb-1">Departamento (opcional)</label>
+        <input 
+          type="text" 
+          name="address.apartment" 
+          value={formData.address.apartment} 
+          onChange={handleChange} 
+          className="w-full px-3 py-2 border border-gray-300 rounded-md" 
+        />
+      </div>
+
+      <button type="submit" className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+        Registrar
+      </button>
+    </form>
+  );
 };
 
 export default RegistrationForm;
