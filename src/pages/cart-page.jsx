@@ -98,7 +98,7 @@ const CartPage = () => {
                 </div>
             )}
             {cartItems.length === 0 ? (
-                <p>No hay productos en tu carrito.</p>
+                <p>El carrito está vacío.</p>
             ) : (
                 <div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
