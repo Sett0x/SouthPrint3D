@@ -35,7 +35,13 @@ const CartPage = () => {
     const handleRemoveItem = async (productId) => {
         try {
             await userService.removeItemFromCart(productId);
-            setCartItems(cartItems.filter(item => item._id !== productId));
+            // Filtrar el elemento del carrito
+            const updatedCartItems = cartItems.filter(item => item._id !== productId);
+            // Actualizar los elementos del carrito
+            setCartItems(updatedCartItems);
+            // Recalcular el totalPrice sumando los precios de los elementos restantes
+            const newTotalPrice = updatedCartItems.reduce((acc, item) => acc + item.totalPrice, 0);
+            setTotalPrice(newTotalPrice.toFixed(2)); // Ajustar a 2 decimales
             setMessage('Producto eliminado del carrito.');
         } catch (error) {
             console.error('Error removing item from cart:', error);
