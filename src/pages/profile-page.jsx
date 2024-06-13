@@ -57,27 +57,28 @@ const ProfilePage = () => {
             <p>Estado: {user.address.state}</p>
             <p>Código postal: {user.address.zipcode}</p>
           </div>
-          <div className="mt-4">
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">Historial de Pedidos</h2>
-            {orderHistory.length > 0 ? (
-              orderHistory.map(order => (
-                <div key={order._id} className="border rounded-lg p-4 mt-4">
-                  <p>ID de Pedido: {order._id}</p>
-                  <p>Fecha: {new Date(order.createdAt).toLocaleDateString()}</p>
-                  <p>Total: ${order.totalPrice.toFixed(2)}</p>
-                  <ul className="list-disc list-inside">
-                    {order.products.map(product => (
-                      <li key={product._id}>{product.productName} - ${product.price.toFixed(2)}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))
-            ) : (
-              <p>No hay historial de pedidos disponible.</p>
-            )}
-          </div>
         </div>
       )}
+      
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold text-gray-800 mb-2">Historial de Pedidos</h2>
+        {orderHistory.length > 0 ? (
+          orderHistory.map(order => (
+            <div key={order._id} className="border rounded-lg p-4 mt-4">
+              <p>ID de Pedido: {order._id}</p>
+              <p>Fecha: {new Date(order.createdAt).toLocaleDateString()}</p>
+              <p>Total: ${order.totalPrice.toFixed(2)}</p>
+              <ul className="list-disc list-inside">
+                {order.products.map(product => (
+                  <li key={product._id}>{product.productName} - ${product.price.toFixed(2)}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        ) : (
+          <p>No hay historial de pedidos disponible.</p>
+        )}
+      </div>
     </div>
   );
 };
