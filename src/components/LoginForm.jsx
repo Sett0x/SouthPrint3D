@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom'; // Importamos Navigate desde react-router-dom
+import { Navigate, Link } from 'react-router-dom'; // Importamos Navigate y Link desde react-router-dom
 import loginService from '../services/loginService';
 
 const LoginForm = () => {
@@ -28,7 +28,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-7xl mx-auto p-6 bg-white rounded-lg">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">Login</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -52,8 +52,11 @@ const LoginForm = () => {
             className="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-blue-500"
           />
         </div>
-        <div>
+        <div className="flex-col justify-between items-center">
           <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Login</button>
+          <div className="mt-4">
+            <Link to="/register" className="block text-center text-blue-500 hover:underline">¿No tienes cuenta? Regístrate aquí</Link>
+          </div>
         </div>
       </form>
     </div>
