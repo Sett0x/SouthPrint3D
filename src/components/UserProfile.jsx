@@ -29,7 +29,7 @@ const UserProfile = () => {
     }
 
     return (
-        <div>
+        <div className=' rounded-lg p-4 mt-4'>
             <h2 className="text-xl font-semibold text-gray-800 mb-2">Información del usuario</h2>
             <p>Usuario: {user.username}</p>
             <p>Email: {user.email}</p>
