@@ -23,7 +23,7 @@ const OrderHistory = () => {
             <h2 className="text-xl font-semibold text-gray-800 mb-2"></h2>
             {orderHistory.length > 0 ? (
                 orderHistory.map(order => (
-                    <div key={order._id} className="border rounded-lg p-4 mt-4">
+                    <div key={order._id} className="border rounded-lg p-4 mt-4 shadow-lg">
                         <p className="px-2 py-2">ID del Pedido: {order._id}</p>
                         <p className="px-2 py-2">Fecha: {new Date(order.createdAt).toLocaleString()}</p>
                         <ul className="list-disc list-inside">
