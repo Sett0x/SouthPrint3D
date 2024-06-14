@@ -46,7 +46,7 @@ const AboutPage = () => {
         <h2 className="text-2xl font-semibold text-gray-700 mb-4">Únete a Nosotros</h2>
         <p className="text-gray-600">
           Si compartes nuestra pasión por la impresión 3D y deseas formar parte de un equipo innovador y dinámico, 
-          ¡nos encantaría saber de ti! Visita nuestra página de <a href="/careers" className="text-blue-500 hover:underline">carreras</a> para conocer las oportunidades disponibles.
+          ¡nos encantaría saber de ti! 
         </p>
       </section>
     </div>
