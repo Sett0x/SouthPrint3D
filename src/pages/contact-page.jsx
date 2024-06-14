@@ -5,7 +5,7 @@ const ContactPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Información de Contacto</h2>
-          <p className="text-gray-600 mb-2">Dirección: 123 Calle Principal, Ciudad, País</p>
+          <p className="text-gray-600 mb-2">Dirección: 37 Calle Platanito, Sevilla, España</p>
           <p className="text-gray-600 mb-2">Teléfono: 744 43 32 56</p>
           <p className="text-gray-600 mb-2">Correo Electrónico: <a href="mailto:southprint3d@gmail.com">southprint3d@gmail.com</a></p>
         </div>

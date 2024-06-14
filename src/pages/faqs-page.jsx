@@ -7,16 +7,23 @@ const FaqsPage = () => {
       answer: "SouthPrint3D es una empresa dedicada a proporcionar tecnología de impresión 3D accesible y de alta calidad a personas y empresas de todas las escalas."
     },
     {
-      question: "¿Qué productos ofrecen?",
-      answer: "Ofrecemos una variedad de impresoras 3D, filamentos y accesorios, así como servicios de impresión 3D personalizados."
+      question: "¿Qué productos y servicios ofrecen?",
+      answer: "Ofrecemos una amplia gama de impresiones 3D, diseñadas para uso, decoración, repuestos o reparaciones. También atendemos peticiones personalizadas para adaptarnos a tus necesidades específicas."
     },
     {
       question: "¿Cómo puedo ponerme en contacto con soporte?",
-      answer: "Puedes ponerte en contacto con nuestro equipo de soporte a través de la página de contacto en nuestro sitio web o enviando un correo electrónico a soporte@southprint3d.com."
+      answer: (
+        <>
+          <p className="text-gray-600 mb-2">Puedes contactarnos de las siguientes maneras:</p>
+          <p className="text-gray-600 mb-2">Por teléfono: 744 43 32 56</p>
+          <p className="text-gray-600 mb-2">Enviándonos un correo: <a href="mailto:southprint3d@gmail.com">southprint3d@gmail.com</a></p>
+          <p className="text-gray-600 mb-2">Visitandonos en persona en: 37 Calle Platanito, Sevilla, España</p>
+        </>
+      )
     },
     {
       question: "¿Ofrecen envíos internacionales?",
-      answer: "Sí, realizamos envíos internacionales a muchos países. Por favor, consulta nuestras políticas de envío para más detalles."
+      answer: "No, por ahora solo realizamos envíos en España."
     },
     {
       question: "¿Qué métodos de pago aceptan?",
